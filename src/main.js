@@ -17,6 +17,16 @@ buttonArray[3] = new buttonHandler( 'activate-all', "" );
 buttonArray[4] = new buttonHandler( 'deactivate-all', "" );
 
 //
+function oneButtonHandler( section ) {
+    const sectionElement = document.querySelector(`#${section}`);
+    if ( sectionElement.className === "power disabled" ) {
+        sectionElement.className = "power enabled";
+    } else {
+        sectionElement.className = "power disabled";
+    }
+}
+
+//
 function allButtonHandler( message ) {
     for( var i = 0; i < 3; i++ ) {
         const sectionElement = document.querySelector(`#${buttonArray[i].section_id}`).className = message;
@@ -31,12 +41,7 @@ buttonArray.forEach( button => {
         } else if ( button.button_id === "deactivate-all" ) {
             allButtonHandler( 'power disabled' );
         } else {
-            const sectionElement = document.querySelector(`#${button.section_id}`);
-            if ( sectionElement.className === "power disabled" ) {
-            sectionElement.className = "power enabled";
-            } else {
-            sectionElement.className = "power disabled";
-            }
+            oneButtonHandler( button.section_id );
         }
     })
 });
